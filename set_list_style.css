@@ -5,14 +5,14 @@ SetList {
 
 Heading {
     font-size: 36px;
-    background-color: sandybrown;
+    background-color: wheat;
     color: lightsteelblue;
     display: block;
     text-align: center;
 }
 Song {
     display: block;
-    border: 1px slategray;
+    border: 2px slategray;
     background-color: lightsteelblue;
     margin: 8px;
     padding: 8px;
@@ -23,7 +23,7 @@ Artist, Title, Genre, Year {
 }
 
 Title {
-    color: sandybrown;
+    color: wheat;
     text-decoration: underline;
     font-weight: bold;
     font-size: larger;
