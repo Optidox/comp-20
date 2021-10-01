@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="set_list_style.css"?>
+<SetList>
+    <Heading>Set list for the Folklorists live 2021!</Heading>
+    <Song>
+        <Title>Lone Star</Title>
+        <Artist>The Front Bottoms</Artist>
+        <Genre>Folk</Genre>
+        <Year>2013</Year>
+    </Song>
+    <Song>
+        <Title>Danny, Dakota &amp; the Wishing Well</Title>
+        <Artist>A Silent Film</Artist>
+        <Genre>Alternative</Genre>
+        <Year>2012</Year>
+    </Song>
+    <Song>
+        <Title>Dandelion Wine</Title>
+        <Artist>Gregory Alan Isakov</Artist>
+        <Genre>Folk</Genre>
+        <Year>2009</Year>
+    </Song>
+    <Song>
+        <Title>Dark Blue</Title>
+        <Artist>Jack's Mannequin</Artist>
+        <Genre>Alternative</Genre>
+        <Year>2005</Year>
+    </Song>
+    <Song>
+        <Title>GOD DON'T TALK TO STRANGERS</Title>
+        <Artist>Noah Gunderson</Artist>
+        <Genre>Folk</Genre>
+        <Year>2019</Year>
+    </Song>
+    <Song>
+        <Title>Called You Twice</Title>
+        <Artist>FIDLAR, K.Flay</Artist>
+        <Genre>Garage rock</Genre>
+        <Year>2019</Year>
+    </Song>
+    <Song>
+        <Title>Repetition</Title>
+        <Artist>Wax Fang</Artist>
+        <Genre>Indie rock</Genre>
+        <Year>2019</Year>
+    </Song>
+    <Song>
+        <Title>No Children</Title>
+        <Artist>The Mountain Goats</Artist>
+        <Genre>Folk</Genre>
+        <Year>2003</Year>
+    </Song>
+    <Song>
+        <Title>Honeybee</Title>
+        <Artist>Steam Powered Giraffe</Artist>
+        <Genre>Cabaret</Genre>
+        <Year>2012</Year>
+    </Song>
+    <Song>
+        <Title>Small Red Boy</Title>
+        <Artist>AJJ</Artist>
+        <Genre>Folk Punk</Genre>
+        <Year>2016</Year>
+    </Song>
+</SetList>

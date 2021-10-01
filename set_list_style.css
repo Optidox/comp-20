@@ -1,0 +1,42 @@
+SetList {
+    margin: 8px;
+    display: block;
+}
+
+Heading {
+    font-size: 36px;
+    background-color: sandybrown;
+    color: lightsteelblue;
+    display: block;
+    text-align: center;
+}
+Song {
+    display: block;
+    border: 1px slategray;
+    background-color: lightsteelblue;
+    margin: 8px;
+    padding: 8px;
+}
+Artist, Title, Genre, Year {
+    display: block;
+    text-align: center;
+}
+
+Title {
+    color: sandybrown;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: larger;
+}
+
+Artist {
+    color:lightcoral;
+}
+
+Genre {
+    color:darkorchid;
+}
+
+Year {
+    color:khaki;
+}
