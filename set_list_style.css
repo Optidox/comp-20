@@ -12,7 +12,7 @@ Heading {
 }
 Song {
     display: block;
-    border: 2px slategray;
+    border: 4px slategray;
     background-color: lightsteelblue;
     margin: 8px;
     padding: 8px;
@@ -38,5 +38,5 @@ Genre {
 }
 
 Year {
-    color:khaki;
+    color:goldenrod;
 }
