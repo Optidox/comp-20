@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Amicable Numbers</title>
+    <script type="text/javascript" src="amicable.js"></script>
+    <style>
+        form {
+            display: table;
+        }
+        .form-field {
+            display: table-row;
+        }
+        label, input {
+            display: table-cell;
+            margin-bottom: 10px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="numberInput" action="" method="" onsubmit="return false;">
+        <div class="form-field">
+            <label for="number1">Enter a whole number: </label>
+            <input type="text" id="num2" name="number1" required>
+        </div>
+        <div class="form-field">
+            <label for="number2">Enter another whole number: </label>
+            <input type="text" id="num1" name="number2" required>
+        </div>
+        <input type="submit" value="Are they amicable?" onclick="main()">
+    </form>
+    <div id="amicable"></div>
+</body>
+</html>
