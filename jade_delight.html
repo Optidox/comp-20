@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="jquery-3.6.0.js"></script>
+<title>Jade Delight</title>
+</head>
+
+<body>
+<script language="javascript">
+
+function MenuItem(name, cost)
+{
+	this.name = name;
+	this.cost=cost;
+}
+
+menuItems = new Array(
+	new MenuItem("Chicken Chop Suey", 4.5),
+	new MenuItem("Sweet and Sour Pork", 6.25),
+	new MenuItem("Shrimp Lo Mein", 5.25),
+	new MenuItem("Moo Shi Chicken", 6.5),
+	new MenuItem("Fried Rice", 2.35)
+);
+
+function makeSelect(name, minRange, maxRange)
+{
+	var t= "";
+	t = "<select name='" + name + "' size='1'>";
+	for (j=minRange; j<=maxRange; j++)
+	   t += "<option>" + j + "</option>";
+	t+= "</select>"; 
+	return t;
+}
+</script>
+
+<h1>Jade Delight</h1>
+<form name="order" onsubmit="return validateForm()">
+
+<p>First Name: <input type="text"  name='fname' /></p>
+<p>Last Name*:  <input type="text"  name='lname' /></p>
+<p class='address'>Street: <input type="text"  name='street'/></p>
+<p class='address'>City: <input type="text"  name='city'/></p>
+<p>Phone*: <input type="text"  name='phone' /></p>
+<p> 
+	<input type="radio"  id="pickup"   name="p_or_d" value = "pickup" checked="checked"/>Pickup  
+	<input type="radio"  id="delivery" name='p_or_d' value = 'delivery'/>
+	Delivery
+</p>
+<table border="0" cellpadding="3">
+  <tr>
+    <th>Select Item</th>
+    <th>Item Name</th>
+    <th>Cost Each</th>
+    <th>Total Cost</th>
+  </tr>
+<script language="javascript">
+
+  var s = "";
+  for (i=0; i< menuItems.length; i++)
+  {
+	  s += "<tr><td>";
+	  s += makeSelect("quan" + i, 0, 10);
+	  s += "</td><td>" + menuItems[i].name + "</td>";
+	  s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+	  s += "<td>$<input type='text' name='cost'/></td></tr>";
+  }
+  document.writeln(s);
+</script>
+</table>
+<p>Subtotal: 
+   $<input type="text"  name='subtotal' id="subtotal" />
+</p>
+<p>Mass tax 6.25%:
+  $ <input type="text"  name='tax' id="tax" />
+</p>
+<p>Total: $ <input type="text"  name='total' id="total" />
+</p>
+
+<input type = "submit" value = "Submit Order" />
+
+</form>
+</body>
+<script>
+  function updateCosts () {
+	costList = document.getElementsByName("cost");
+	Array.from(costList).forEach((e, i) => e.value = (parseFloat($(e).closest('tr').find('option:selected').text(), 10) * menuItems[i].cost).toFixed(2));
+	document.getElementById("subtotal").value = Array.from(costList).reduce((z, e) => z + parseFloat(e.value, 10), 0).toFixed(2);
+	document.getElementById("tax").value = (parseFloat(document.getElementById("subtotal").value, 10) * 0.0625).toFixed(2);
+	document.getElementById("total").value = (parseFloat(document.getElementById("tax").value, 10) + parseFloat(document.getElementById("subtotal").value, 10)).toFixed(2);
+  }
+
+  Array.from(document.getElementsByTagName("select")).forEach(e => e.addEventListener('change', () => updateCosts()));
+
+  Array.from(document.getElementsByClassName("address")).forEach((e) => e.style.display = "none");
+  $('#pickup').click(() => (Array.from(document.getElementsByClassName("address")).forEach((e) => e.style.display = "none")));
+  $('#delivery').click(() => (Array.from(document.getElementsByClassName("address")).forEach((e) => e.style.display = "block")));
+
+  function makeOrderString() {
+	  costList = document.getElementsByName("cost");
+	  let orderString = "You ordered: ";
+	  Array.from(costList).forEach((e, i) => orderString += ($(e).closest('tr').find('option:selected').text() + ' ' + menuItems[i].name + ', '));
+	  return orderString.substring(0, orderString.length - 2) + '.';
+  }
+
+  function validateForm () {
+	let form = document.forms["order"];
+	if (form['lname'].value == '') {
+		alert("Last name must be filled out");
+		return false;
+	}
+	if (isNaN(parseInt(form['phone'].value, 10)) || form['phone'].value.length < 10 || form['phone'].value.length > 11) {
+		alert("Must enter a valid phone number");
+		return false;
+	}
+	if (document.getElementById('subtotal').value == ''  || document.getElementById('subtotal').value == '0.00') {
+		alert("At least one item must be ordered");
+		return false;
+	}
+	let readyTime = new Date();
+	if (document.getElementsByClassName('address')[0].style.display != "none") {
+		if (form['city'].value == '') {
+			alert("City must be filled out for delivery");
+			return false;
+		}
+		if (form['street'].value == '') {
+			alert("Street must be filled out for delivery");
+			return false;
+		}
+		readyTime = new Date(readyTime.getTime() + 1800000);
+	} else {
+		readyTime = new Date(readyTime.getTime() + 900000);
+	}
+	let tab = window.open('about:blank', '_blank');
+	tab.document.write(`
+	<html>
+		<body>
+			<h1>Thank you for your order!</h1>
+			<p>${makeOrderString()}</p>
+			<p>Your total is: $${document.getElementById('total').value}.</p>
+			<p>Your order will be ready at: ${readyTime.getHours()}:${readyTime.getMinutes()}.</p>
+		</body>
+	</html>`);
+	tab.document.close();
+  }
+</script>
+</html>
