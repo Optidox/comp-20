@@ -78,7 +78,6 @@
             function formatJSON (genre="") {
                 let htmlstring = ``;
                 for (let i = 0; i < setList.SetList.length; i++) {
-                    console.log(setList.SetList[i].Genres.includes(genre));
                     if (!genre || setList.SetList[i].Genres.includes(genre)) {
                         htmlstring += "Title: " + setList.SetList[i].Title + "<br>";
                         htmlstring += "Artist: " + setList.SetList[i].Artist + "<br>";
