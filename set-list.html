@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Folklorists Live 2021 Set List</title>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                text-align: center;
+            }
+        </style>
+        <script language="javascript">
+
+            const setList = JSON.parse(`{
+                "SetList": [
+                {
+                    "Title": "Lone Star",
+                    "Artist": "The Front Bottoms",
+                    "Genres": ["Folk", "Indie Rock"],
+                    "Year": "2013"
+                },
+                {
+                    "Title": "Danny, Dakota & the Wishing Well",
+                    "Artist": "A Silent Film",
+                    "Genres": ["Alternative"],
+                    "Year": "2012"
+                },
+                {
+                    "Title": "Dandelion Wine",
+                    "Artist": "Gregory Alan Isakov",
+                    "Genres": ["Folk"],
+                    "Year": "2009"
+                },
+                {
+                    "Title": "Dark Blue",
+                    "Artist": "Jack's Mannequin",
+                    "Genres": ["Alternative"],
+                    "Year": "2005"
+                },
+                {
+                    "Title": "GOD DON'T TALK TO STRANGERS",
+                    "Artist": "Noah Gunderson",
+                    "Genres": ["Folk"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "Called You Twice",
+                    "Artist": "FIDLAR, K.Flay",
+                    "Genres": ["Garage Rock", "Indie Rock"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "Repetition",
+                    "Artist": "Wax Fang",
+                    "Genres": ["Indie Rock", "Rock"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "No Children",
+                    "Artist": "The Mountain Goats",
+                    "Genres": ["Folk", "Folk Punk"],
+                    "Year": "2003"
+                },
+                {
+                    "Title": "Honeybee",
+                    "Artist": "Steam Powered Giraffe",
+                    "Genres": ["Cabaret"],
+                    "Year": "2012"
+                },
+                {
+                    "Title": "Small Red Boy",
+                    "Artist": "AJJ",
+                    "Genres": ["Folk Punk", "Folk"],
+                    "Year": "2016"
+                }
+                ]
+            }`);
+
+            function formatJSON (genre="") {
+                let htmlstring = ``;
+                for (let i = 0; i < setList.SetList.length; i++) {
+                    console.log(setList.SetList[i].Genres.includes(genre));
+                    if (!genre || setList.SetList[i].Genres.includes(genre)) {
+                        htmlstring += "Title: " + setList.SetList[i].Title + "<br>";
+                        htmlstring += "Artist: " + setList.SetList[i].Artist + "<br>";
+                        htmlstring += "Genres: " + setList.SetList[i].Genres.join(", ") + "<br>";
+                        htmlstring += "Year: " + setList.SetList[i].Year + "<br><br>";
+                    }
+                }
+                return htmlstring;
+            }
+
+            function writePage () {
+                document.getElementById("serialized").innerHTML = JSON.stringify(setList);
+                document.getElementById("formatted").innerHTML = formatJSON();
+            }
+
+            function handleForm () {
+                let select = document.getElementById("genre");
+                let genre = select.options[select.selectedIndex].value;
+                document.getElementById("filtered").innerHTML = formatJSON(genre);
+            }
+        </script>
+    </head>
+    <body onload="writePage()">
+        <div id="serialized"></div> <br><br>
+        <div id="formatted"></div>
+        <p>Pick your favorite genre!</p>
+        <form onsubmit="return false">
+            <select name="genre" id="genre">
+                <option value="Folk">Folk</option>
+                <option value="Folk Punk">Folk Punk</option>
+                <option value="Cabaret">Cabaret</option>
+                <option value="Rock">Rock</option>
+                <option value="Indie Rock">Indie Rock</option>
+                <option value="Alternative">Alternative</option>
+                <option value="Garage Rock">Garage Rock</option>
+            </select>
+            <input type="submit" value="Filter" onclick="handleForm()">
+        </form> <br>
+        <div id="filtered"></div>
+    </body>
+</html>
