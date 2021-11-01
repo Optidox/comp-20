@@ -13,21 +13,19 @@
 
             /* Below Code borrowed from class examples */
             function loadFile() {
-
-			request = new XMLHttpRequest();
- 			request.open("GET", "https://optidox.github.io/comp-20/set-list.json", true);
-			request.onreadystatechange = function() {
-				if (request.readyState == 4 && request.status == 200) {
-					result = request.responseText;
-					return JSON.parse(result);
-				}
+		request = new XMLHttpRequest();
+ 		request.open("GET", "https://optidox.github.io/comp-20/set-list.json", true);
+		request.onreadystatechange = function() {
+			if (request.readyState == 4 && request.status == 200) {
+				result = request.responseText;
+				return JSON.parse(result);
 			}
-			request.send();
 		}
-		
-            const setList = loadFile();
+		request.send();
+	    }
 	    
             function formatJSON (genre="") {
+		let setList = loadFile();
                 let htmlstring = ``;
                 for (let i = 0; i < setList.SetList.length; i++) {
                     if (!genre || setList.SetList[i].Genres.includes(genre)) {
@@ -41,7 +39,7 @@
             }
 
             function writePage () {
-                document.getElementById("serialized").innerHTML = JSON.stringify(setList);
+                document.getElementById("serialized").innerHTML = JSON.stringify(loadFile());
                 document.getElementById("formatted").innerHTML = formatJSON();
             }
 
