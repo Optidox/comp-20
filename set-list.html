@@ -26,6 +26,7 @@
 	    
             function formatJSON (genre="") {
 		let setList = loadFile();
+		console.log(setList);
                 let htmlstring = ``;
                 for (let i = 0; i < setList.SetList.length; i++) {
                     if (!genre || setList.SetList[i].Genres.includes(genre)) {
