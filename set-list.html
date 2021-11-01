@@ -46,7 +46,7 @@
             function handleForm () {
                 let select = document.getElementById("genre");
                 let genre = select.options[select.selectedIndex].value;
-                document.getElementById("filtered").innerHTML = formatJSON(JSON.parse(document.getElementById("serialized").innerHTML)genre);
+                document.getElementById("filtered").innerHTML = formatJSON(JSON.parse(document.getElementById("serialized").innerHTML), genre);
             }
         </script>
     </head>
