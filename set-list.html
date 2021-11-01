@@ -13,20 +13,119 @@
 
             /* Below Code borrowed from class examples */
             function loadFile() {
-		request = new XMLHttpRequest();
- 		request.open("GET", "https://optidox.github.io/comp-20/set-list.json", true);
-		request.onreadystatechange = function() {
-			if (request.readyState == 4 && request.status == 200) {
-				result = request.responseText;
-				return JSON.parse(result);
+
+			/* Step 1: Make instance of request object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			// Step 2: Set the URL for the AJAX request to be the JSON file
+ 
+			request.open("GET", "https://optidox.github.io/comp-20/set-list.json", true);
+
+			console.log("2 - opened request file");
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() {
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) {
+
+					// Step 5: wait for done + success
+
+					result = request.responseText;
+					data = JSON.parse(result);
+					document.getElementById("data").innerHTML = JSON.stringify(data);
+					console.log(data);
+					return data;
+				}
+
+				else if (request.readyState == 4 && request.status != 200) {
+
+				document.getElementById("data").innerHTML = "Something is wrong!  Check the logs to see where this went off the rails";
+
+				}
+
+				else if (request.readyState == 3) {
+
+					document.getElementById("data").innerHTML = "Too soon!  Try again";
+
+				}
+
 			}
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 - Request sent");
 		}
-		request.send();
-	    }
-	    
+            const thing = loadFile();
+	    console.log(thing);
+            const setList = JSON.parse(`{
+                "SetList": [
+                {
+                    "Title": "Lone Star",
+                    "Artist": "The Front Bottoms",
+                    "Genres": ["Folk", "Indie Rock"],
+                    "Year": "2013"
+                },
+                {
+                    "Title": "Danny, Dakota & the Wishing Well",
+                    "Artist": "A Silent Film",
+                    "Genres": ["Alternative"],
+                    "Year": "2012"
+                },
+                {
+                    "Title": "Dandelion Wine",
+                    "Artist": "Gregory Alan Isakov",
+                    "Genres": ["Folk"],
+                    "Year": "2009"
+                },
+                {
+                    "Title": "Dark Blue",
+                    "Artist": "Jack's Mannequin",
+                    "Genres": ["Alternative"],
+                    "Year": "2005"
+                },
+                {
+                    "Title": "GOD DON'T TALK TO STRANGERS",
+                    "Artist": "Noah Gunderson",
+                    "Genres": ["Folk"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "Called You Twice",
+                    "Artist": "FIDLAR, K.Flay",
+                    "Genres": ["Garage Rock", "Indie Rock"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "Repetition",
+                    "Artist": "Wax Fang",
+                    "Genres": ["Indie Rock", "Rock"],
+                    "Year": "2019"
+                },
+                {
+                    "Title": "No Children",
+                    "Artist": "The Mountain Goats",
+                    "Genres": ["Folk", "Folk Punk"],
+                    "Year": "2003"
+                },
+                {
+                    "Title": "Honeybee",
+                    "Artist": "Steam Powered Giraffe",
+                    "Genres": ["Cabaret"],
+                    "Year": "2012"
+                },
+                {
+                    "Title": "Small Red Boy",
+                    "Artist": "AJJ",
+                    "Genres": ["Folk Punk", "Folk"],
+                    "Year": "2016"
+                }
+                ]
+            }`);
+
             function formatJSON (genre="") {
-		let setList = loadFile();
-		console.log(setList);
                 let htmlstring = ``;
                 for (let i = 0; i < setList.SetList.length; i++) {
                     if (!genre || setList.SetList[i].Genres.includes(genre)) {
@@ -40,7 +139,7 @@
             }
 
             function writePage () {
-                document.getElementById("serialized").innerHTML = JSON.stringify(loadFile());
+                document.getElementById("serialized").innerHTML = JSON.stringify(setList);
                 document.getElementById("formatted").innerHTML = formatJSON();
             }
 
