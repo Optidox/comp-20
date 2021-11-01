@@ -10,50 +10,47 @@
             }
         </style>
         <script language="javascript">
-
-	    let setList = "";
 		
-            /* Below Code borrowed from class examples */
+            /* loadFile() borrowed from class examples */
+
             function loadFile() {
 		request = new XMLHttpRequest();
  		request.open("GET", "https://optidox.github.io/comp-20/set-list.json", true);
 		request.onreadystatechange = function() {
 			if (request.readyState == 4 && request.status == 200) {
 				result = request.responseText;
-				setList = JSON.parse(result);
+				writePage(JSON.parse(result));
 			}
 		}
 		request.send();
 	    }
 	    
-            function formatJSON (genre="") {
-		console.log(setList);
+            function formatJSON (data, genre="") {
                 let htmlstring = ``;
-                for (let i = 0; i < setList.SetList.length; i++) {
-                    if (!genre || setList.SetList[i].Genres.includes(genre)) {
-                        htmlstring += "Title: " + setList.SetList[i].Title + "<br>";
-                        htmlstring += "Artist: " + setList.SetList[i].Artist + "<br>";
-                        htmlstring += "Genres: " + setList.SetList[i].Genres.join(", ") + "<br>";
-                        htmlstring += "Year: " + setList.SetList[i].Year + "<br><br>";
+                for (let i = 0; i < data.SetList.length; i++) {
+                    if (!genre || data.SetList[i].Genres.includes(genre)) {
+                        htmlstring += "Title: " + data.SetList[i].Title + "<br>";
+                        htmlstring += "Artist: " + data.SetList[i].Artist + "<br>";
+                        htmlstring += "Genres: " + data.SetList[i].Genres.join(", ") + "<br>";
+                        htmlstring += "Year: " + data.SetList[i].Year + "<br><br>";
                     }
                 }
                 return htmlstring;
             }
 
-            function writePage () {
-		loadFile();
-                document.getElementById("serialized").innerHTML = JSON.stringify(setList);
-                document.getElementById("formatted").innerHTML = formatJSON();
+            function writePage (data) {
+                document.getElementById("serialized").innerHTML = JSON.stringify(data);
+                document.getElementById("formatted").innerHTML = formatJSON(data);
             }
 
             function handleForm () {
                 let select = document.getElementById("genre");
                 let genre = select.options[select.selectedIndex].value;
-                document.getElementById("filtered").innerHTML = formatJSON(genre);
+                document.getElementById("filtered").innerHTML = formatJSON(JSON.parse(document.getElementById("serialized").innerHTML)genre);
             }
         </script>
     </head>
-    <body onload="writePage()">
+    <body onload="loadFile()">
         <div id="data"></div> <br><br>
         <div id="serialized"></div> <br><br>
         <div id="formatted"></div>
