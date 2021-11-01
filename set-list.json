@@ -1,0 +1,64 @@
+{
+    "SetList": [
+    {
+        "Title": "Lone Star",
+        "Artist": "The Front Bottoms",
+        "Genres": ["Folk", "Indie Rock"],
+        "Year": "2013"
+    },
+    {
+        "Title": "Danny, Dakota & the Wishing Well",
+        "Artist": "A Silent Film",
+        "Genres": ["Alternative"],
+        "Year": "2012"
+    },
+    {
+        "Title": "Dandelion Wine",
+        "Artist": "Gregory Alan Isakov",
+        "Genres": ["Folk"],
+        "Year": "2009"
+    },
+    {
+        "Title": "Dark Blue",
+        "Artist": "Jack's Mannequin",
+        "Genres": ["Alternative"],
+        "Year": "2005"
+    },
+    {
+        "Title": "GOD DON'T TALK TO STRANGERS",
+        "Artist": "Noah Gunderson",
+        "Genres": ["Folk"],
+        "Year": "2019"
+    },
+    {
+        "Title": "Called You Twice",
+        "Artist": "FIDLAR, K.Flay",
+        "Genres": ["Garage Rock", "Indie Rock"],
+        "Year": "2019"
+    },
+    {
+        "Title": "Repetition",
+        "Artist": "Wax Fang",
+        "Genres": ["Indie Rock", "Rock"],
+        "Year": "2019"
+    },
+    {
+        "Title": "No Children",
+        "Artist": "The Mountain Goats",
+        "Genres": ["Folk", "Folk Punk"],
+        "Year": "2003"
+    },
+    {
+        "Title": "Honeybee",
+        "Artist": "Steam Powered Giraffe",
+        "Genres": ["Cabaret"],
+        "Year": "2012"
+    },
+    {
+        "Title": "Small Red Boy",
+        "Artist": "AJJ",
+        "Genres": ["Folk Punk", "Folk"],
+        "Year": "2016"
+    }
+    ]
+}
