@@ -36,7 +36,8 @@
 
 					result = request.responseText;
 					data = JSON.parse(result);
-					document.getElementById("data").innerHTML = JSON.stringify(data);  
+					document.getElementById("data").innerHTML = JSON.stringify(data);
+					console.log(data);
 				}
 
 				else if (request.readyState == 4 && request.status != 200) {
