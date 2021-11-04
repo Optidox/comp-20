@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+    <input type="checkbox" id="all" name="all" value="all">
+    <label id="all-label" for="all">Check All</label><br>
+    <input type="checkbox" id="first" name="first" value="first">
+    <label for="first">First</label><br>
+    <input type="checkbox" id="second" name="second" value="second">
+    <label for="second">Second</label><br> 
+    <input type="checkbox" id="third" name="third" value="third">
+    <label for="third">Third</label><br>
+    <input type="checkbox" id="fourth" name="fourth" value="fourth">
+    <label for="fourth">Fourth</label><br>
+</body>
+<script>
+    function checker (check) {
+        let boxes = ["first", "second", "third", "fourth"]
+        for (id in boxes) {
+            document.getElementById(boxes[id]).checked = check;
+        }
+    }
+    function checkHandler() {
+        if(document.getElementById("all-label").innerHTML == "Check All") {
+            document.getElementById("all-label").innerHTML = "Uncheck All";
+            checker(true);
+        } else {
+            document.getElementById("all-label").innerHTML = "Check All";
+            checker(false);
+        }
+    }
+
+    document.getElementById("all").addEventListener("click", checkHandler);
+</script>
+</html>
