@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Jump!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        function doJump() {
+            if (document.getElementById("jump").value == "JUMP >") {
+                document.getElementById("jump").value = "< JUMP";
+                document.getElementById("right").value = document.getElementById("left").value;
+                document.getElementById("left").value = '';
+            }
+            else {
+                document.getElementById("jump").value = "JUMP >";
+                document.getElementById("left").value = document.getElementById("right").value;
+                document.getElementById("right").value = '';
+            }
+        }
+    </script>
+    <style>
+        input {
+            display: inline-block;
+            margin: 16px;
+            font-size: 36px;
+        }
+        #left, #right {
+            outline: 2px solid turquoise;
+        }
+        #jump {
+            outline: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="text" value="abc" id="left" />
+        <input type="button" value="JUMP >" id="jump" onclick="doJump()" />
+        <input type="text" id="right" />
+    </form>
+</body>

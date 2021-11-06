@@ -3,8 +3,114 @@
 <head>
     <meta charset="utf-8">
     <title>Joe's Hotdogs</title>
-    <script type = "text/javascript" src="JoesHotdogs.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    /* these functions adapted from jade delight*/
+    function MenuItem(name, cost)
+    {
+	    this.name = name;
+	    this.cost=cost;
+    }
+
+    menuItems = new Array(
+        new MenuItem("Hotdogs", 3.75),
+        new MenuItem("French Fries", 2),
+        new MenuItem("Drinks", 1.5),
+    );
+
+    function makeSelect(name, minRange, maxRange)
+    {
+        range = [0, 1, 2, 3, 4, 5, 10, 15, 20];
+        var t= "";
+        t = "<select name='" + name + "' size='1'>";
+        for (j=0; j<range.length; j++)
+        t += "<option>" + range[j] + "</option>";
+        t+= "</select>"; 
+        return t;
+    }
+    </script>
 </head>
-<body onload="hotdogCalc();">
+<body>
+    <form id="order" onsubmit="return false">
+        <table border="0" cellpadding="3">
+            <tr>
+            <th>Select Item</th>
+            <th>Item Name</th>
+            <th>Cost Each</th>
+            <th>Total Cost</th>
+            </tr>
+            <script language="javascript">
+
+                var s = "";
+                for (i=0; i< menuItems.length; i++)
+                {
+                    s += "<tr><td>";
+                    s += makeSelect("quan" + i, 0, 10);
+                    s += "</td><td>" + menuItems[i].name + "</td>";
+                    s += "<td> $ " + menuItems[i].cost.toFixed(2) + "</td>";
+                    s += "<td>$<input type='text' name='cost'/></td></tr>";
+                }
+                document.writeln(s);
+            </script>
+            <tr><td></td><td></td><td>Subtotal:</td> 
+                <td>$<input type="text"  name='subtotal' id="subtotal" /></td></tr>
+            <tr><td></td><td></td><td>Mass tax 6.25%:</td>
+                <td>$<input type="text"  name='tax' id="tax" /></td></tr>
+            <tr><td></td><td></td><td>Total: <td>$<input type="text"  name='total' id="total" /></td></tr>
+            <tr><td></td><td></td><td></td><td><input type="submit" id= "submit" value="Place your order" onclick=validateForm() /></td></tr>
+        </table>
+    </form>
 </body>
+<script>
+    function updateCosts() {
+        costList = document.getElementsByName("cost");
+        Array.from(costList).forEach((e, i) => e.value = (parseFloat($(e).closest('tr').find('option:selected').text(), 10) * menuItems[i].cost).toFixed(2));
+        document.getElementById("subtotal").value = Array.from(costList).reduce((z, e) => z + parseFloat(e.value, 10), 0).toFixed(2);
+        document.getElementById("tax").value = (parseFloat(document.getElementById("subtotal").value, 10) * 0.0625).toFixed(2);
+        document.getElementById("total").value = (parseFloat(document.getElementById("tax").value, 10) + parseFloat(document.getElementById("subtotal").value, 10)).toFixed(2);
+    }
+
+    Array.from(document.getElementsByTagName("select")).forEach(e => e.addEventListener('change', () => updateCosts()));
+
+    function makeOrderString() {
+	    costList = document.getElementsByName("cost");
+	    let orderString = `<p class="col1">You ordered:</p><p class="col2">`;
+	    Array.from(costList).forEach((e, i) => orderString += ($(e).closest('tr').find('option:selected').text() + ' ' + menuItems[i].name + ', '));
+	    return orderString.substring(0, orderString.length - 2) + '.</p>';
+    }
+
+    function validateForm () {
+	let form = document.forms["order"];
+	if (document.getElementById('subtotal').value == ''  || document.getElementById('subtotal').value == '0.00') {
+		alert("At least one item must be ordered");
+		return false;
+	}
+	let tab = window.open('about:blank', '_blank');
+	tab.document.write(`
+	<html>
+        <style>
+            .col1 { 
+                display: inline-block;
+                padding: 16px;
+                color: blue;
+                font-size: 24px
+            }
+            .col2 {
+                display: inline-block;
+                padding: 16px;
+                color: red;
+                font-size: 24px
+            }
+        </style>
+		<body>
+			<h1>Thank you for your order!</h1>
+			${makeOrderString()}<br>
+            <p class="col1">Your subtotal is: </p><p class="col2">$${document.getElementById('subtotal').value}.</p><br>
+			<p class="col1">Your tax is: </p><p class="col2">$${document.getElementById('tax').value}.</p><br>
+            <p class="col1">Your total is: </p><p class="col2">$${document.getElementById('total').value}.</p>
+		</body>
+	</html>`);
+	tab.document.close();
+  }
+</script>
 </html>
