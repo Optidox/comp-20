@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+	<title>GitHub API Fun</title>
+	<meta charset="utf-8"/>
+	<script>
+		function loadMessages() {
+			let request = new XMLHttpRequest();
+			request.open("GET", "https://api.github.com/users/optidox", true);
+			request.onreadystatechange = () => document.getElementById("messages").innerHTML = request.responseText;
+			request.send();
+		}
+	</script>
+</head>
+
+<body onload="loadMessages()">
+	<h1>About this API</h1>
+	<p>For this assignment, I chose the GitHub API. It does far too many things to list them all here, but at the basic level it gets information about users and repositories or interacts with user profiles or repositories on behalf of users or organizations.</p>
+	<p>I found it on <a href="https://docs.github.com/en/rest">GitHub docs</a>, but admittedly this assignment isn't my first time playing with it.</p>
+	<p>I chose to send an asynchronous GET request with no other parameters and no options pertinent to CORS. I requested all the public information about my user profile, which required no keys or authentication.</p>
+	<p>One application I can imagine using this API on is one that gets broad information about public repositories and tries to answer questions like "what language is the most popular?" or "what license is the most popular?" and other fun queries. Another possible application is one that uses the Checks API specifically to enforce a uniform style for a large, collaborative repository.</p>
+	<h1>JSON Data</h1>
+	<div id="messages"></div>
+</body>
+</html>
